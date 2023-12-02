@@ -1,0 +1,19 @@
+<%- include ("./partials/header.ejs") %>
+
+<div class="container-lg">
+  <h1 class="mt-4 mb-3">Edit ToDo</h1>
+
+  <form action="/update/" method="post">
+    <textarea class="form-control mb-3" type="text" rows="5" name="edit__todo">
+<%= data %></textarea
+    >
+
+    <div class="button-container">
+      <button id="new-post" class="btn btn-success" type="submit">
+        Update task
+      </button>
+    </div>
+  </form>
+</div>
+
+<%- include ("./partials/footer.ejs") %>

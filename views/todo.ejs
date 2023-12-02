@@ -1,0 +1,108 @@
+
+<%- include("./partials/header.ejs") %>
+
+<div class="container-lg">
+ <main>
+   <div class="post-header mt-4">
+     <h3>
+       Welcome to the ToDo App! Here you can create, edit and delete your
+       tasks below.
+      </h3>
+    </div>
+    <section class="create_new_todo">
+      <form action="/create-todo" method="post">
+        <div class="mt-3">
+          <label for="exampleFormControlTextarea1" class="form-label "
+            >Enter new ToDo Here 👇
+          </label>
+        </div>
+        <div>
+          <textarea
+            class="form-control mb-3"
+            type = "text"
+            rows="5"
+            name="create__todo"></textarea> 
+        </div>
+        <div class="mb-3">
+          <button class="btn btn-primary" type="submit">
+            Create new task
+          </button>
+        </div>
+            
+      </form>
+    </section>
+
+    <section class="container-lg">
+      <div class="post-header mt-4">
+        <h3>Active Tasks</h3>
+      </div>
+
+
+      
+        
+      <% if (locals.posts.length >= 1){ 
+      for(var i =0; i<posts.length; i++){ %>
+           
+
+      <div class="card col mb-3 w-auto">
+        <h5 class="card-title card-header text-bg-primary">Task <%= i+1 %></h5>
+        <div class="card-body">
+          <p class="card-text"><%= posts[i]%></p>
+          <div class="d-flex justify-content-end">
+            <form action="/completed" method="get" class="p-1">
+              <a class="btn btn-success" href="/completed/<%= i %>">Completed</a>
+            </form>
+            <form action="/edit" method="get" class="p-1">
+              <a class="btn btn-primary" href="/edit/<%= i %>"> Edit</a>
+            </form>
+            <form action="/delete" method="get" class="p-1">
+              <a class="btn btn-outline-danger" href="/delete/<%= i %>"> Delete</a>
+            </form> 
+          </div>
+        </div>         
+      </div>
+          
+
+      <%}} else {%>
+        
+      <div class="alert alert-secondary" role="alert">
+         No active tasks! Please create new ToDo. 🙂
+      </div>
+
+      <% } %>
+
+
+
+
+      <div class="post-header mt-4">
+        <h3>Completed Tasks</h3>
+      </div>
+      
+      <% if (locals.completed.length >= 1){ 
+      for(var i =0; i<completed.length; i++){ %>
+           
+
+      <div class="card mb-3 w-auto">
+        <h5 class="card-title card-header text-bg-success"> Completed Task <%= i+1 %></h5>
+        <div class="card-body">
+          <p class="card-text"><%= completed[i]%></p>
+          <div class="d-flex justify-content-end">
+            <form action="/delete/completed" method="get" class="p-1">
+              <a class="btn btn-outline-danger" href="/delete/completed/<%= i %>"> Delete</a>
+            </form> 
+          </div>
+        </div>         
+      </div>
+          
+
+      <%}} else {%>
+        
+      <div class="alert alert-success" role="alert">
+         No completed tasks yet! Complete your tasks to see them here. 🙂
+      </div>
+
+      <% } %>
+    </section>
+     
+
+<%- include("./partials/footer.ejs") %>
